@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using DemoMassTransitAspnetcore.Dto;
+using MassTransit;
 using NCrontab;
 
 namespace DemoMassTransitAspnetcore.Cron

@@ -1,3 +1,4 @@
+using DemoMassTransitAspnetcore.Dto;
 using DemoMassTransitAspnetcore.Messaging;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
