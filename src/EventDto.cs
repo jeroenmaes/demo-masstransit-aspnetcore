@@ -2,8 +2,8 @@
 {
     public class EventDto
     {
-        public object MessageDate { get; set; }
-        public object MessageText { get; set; }        
+        public DateTime MessageDate { get; set; }
+        public string MessageText { get; set; }        
         public string MessageOrigin { get; set; }
     }
 }

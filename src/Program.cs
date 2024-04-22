@@ -1,4 +1,5 @@
 
+using DemoMassTransitAspnetcore.MessageConsumers;
 using MassTransit;
 using System.Reflection;
 
@@ -17,17 +18,38 @@ namespace DemoMassTransitAspnetcore
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // in-memory bus for send/receive
             builder.Services.AddMassTransit(x =>
             {
                 x.SetKebabCaseEndpointNameFormatter();
-                var entryAssembly = Assembly.GetEntryAssembly();
-                x.AddConsumers(entryAssembly);               
+                x.AddConsumer<EventConsumer>();
                 x.UsingInMemory((context, cfg) =>
                 {
                     cfg.ConfigureEndpoints(context);
                 });
+
             });
-            
+
+            // second bus for receive only fro Azure SB
+            builder.Services.AddMassTransit<ISecondBus>(x =>
+            {
+                x.SetKebabCaseEndpointNameFormatter();
+                x.AddConsumer<EventConsumer>();
+                x.UsingAzureServiceBus((context, cfg) =>
+                {
+                    cfg.Host("Endpoint=sb://xxx.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=zzzz");
+                    cfg.ReceiveEndpoint("events", cfg =>
+                    {                        
+                        cfg.ConfigureConsumeTopology = false;
+                        cfg.ConfigureConsumer<EventConsumer>(context);
+                    });
+                    cfg.DefaultContentType = new System.Net.Mime.ContentType("application/json");
+
+                    // use RAW serializer as messages don't originate from MassTransit!
+                    cfg.UseNewtonsoftRawJsonDeserializer();                    
+                });
+            });
+
             builder.Services.AddHostedService<BackgroundJob>();
 
             var app = builder.Build();
