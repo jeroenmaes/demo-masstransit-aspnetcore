@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using NCrontab;
 
-namespace DemoMassTransitAspnetcore
+namespace DemoMassTransitAspnetcore.Cron
 {
     public class BackgroundJob : BackgroundService
     {

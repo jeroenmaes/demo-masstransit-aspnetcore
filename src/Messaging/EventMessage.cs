@@ -1,4 +1,4 @@
-namespace DemoMassTransitAspnetcore
+namespace DemoMassTransitAspnetcore.Messaging
 {
     public class EventMessage
     {

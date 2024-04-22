@@ -1,6 +1,6 @@
 ﻿using MassTransit;
 
-namespace DemoMassTransitAspnetcore
+namespace DemoMassTransitAspnetcore.Messaging
 {
     public interface ISecondBus :
     IBus
