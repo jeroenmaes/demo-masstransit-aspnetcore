@@ -31,8 +31,8 @@ namespace DemoMassTransitAspnetcore
                 });
 
             });
-
-            // second bus for receive only fro Azure SB
+                        
+            // second bus for receive only for Azure SB
             builder.Services.AddMassTransit<ISecondBus>(x =>
             {
                 x.SetKebabCaseEndpointNameFormatter();
