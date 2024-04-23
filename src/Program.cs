@@ -25,6 +25,7 @@ namespace DemoMassTransitAspnetcore
             {
                 x.SetKebabCaseEndpointNameFormatter();
                 x.AddConsumer<EventConsumer>();
+                x.AddConsumer<CommandConsumer>();
                 x.UsingInMemory((context, cfg) =>
                 {
                     cfg.ConfigureEndpoints(context);

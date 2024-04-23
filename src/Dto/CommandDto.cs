@@ -1,6 +1,6 @@
 ﻿namespace DemoMassTransitAspnetcore.Dto
 {
-    public class EventDto
+    public class CommandDto
     {
         public DateTime MessageDate { get; set; }
         public string MessageContent { get; set; }

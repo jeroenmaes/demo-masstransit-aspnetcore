@@ -45,7 +45,7 @@ namespace DemoMassTransitAspnetcore.Cron
         {
             // Put message on bus following the CRON schedule
 
-            await _bus.Publish(new EventDto { MessageText = "Hello!", MessageDate = DateTime.UtcNow, MessageOrigin = "BackgroundJob" }, stoppingToken);
+            await _bus.Publish(new CommandDto { MessageContent = "SyncAllDataCommand", MessageDate = DateTime.UtcNow, MessageOrigin = "BackgroundJob" }, stoppingToken);
         }
     }
 }

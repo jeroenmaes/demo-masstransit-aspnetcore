@@ -15,9 +15,9 @@ namespace DemoMassTransitAspnetcore.MessageConsumers
 
         public Task Consume(ConsumeContext<EventDto> context)
         {
-            _logger.LogInformation("Received Text: {MessageText}, Origin: {MessageOrigin}, Timestamp: {MessageDate}", context.Message.MessageText, context.Message.MessageOrigin, context.Message.MessageDate);
+            _logger.LogInformation("Received Event: {MessageContent}, Origin: {MessageOrigin}, Timestamp: {MessageDate}", context.Message.MessageContent, context.Message.MessageOrigin, context.Message.MessageDate);
 
-            // Consume from bus and do the actual work
+            // Consume from bus and do the actual work (SyncDataForSpecificId)
 
             return Task.CompletedTask;
         }
